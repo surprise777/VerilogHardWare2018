@@ -1,0 +1,97 @@
+module music(CLOCK_25, KEY, speaker);
+		input CLOCK_25;
+		input [3:0] KEY;
+		output speaker;
+		
+		assign enable_do = ~KEY[2];
+		assign enable_re = ~KEY[1];
+		assign enable_mi = ~KEY[0];
+		
+		play_do do(.clk(CLOCK_25),
+					  .enable_do(enable_do),
+					  .speaker(speaker))
+		
+		play_re re(.clk(CLOCK_25),
+					  .enable_re(enable_re),
+					  .speaker(speaker))
+		
+		play_mi mi(.clk(CLOCK_25),
+					  .enable_mi(enable_mi),
+					  .speaker(speaker))
+						
+		
+		
+
+
+
+
+module play_do(clk, enable_do, speaker);
+		input clk;
+		output speaker;
+		parameter clkdivider = 25000000/523/2;
+
+		reg [14:0] counter;
+		always @(posedge clk) begin
+			if (enable_do) begin
+				if(counter==0) 
+					counter <= clkdivider-1; 
+				else counter <= counter-1;
+			end
+		end
+		
+		reg speaker;
+		
+		always @(posedge clk) 
+			if(counter==0) 
+				speaker <= ~speaker;				
+
+endmodule 
+
+
+
+module play_re(clk, enable_re, speaker);
+		input clk;
+		output speaker;
+		parameter clkdivider = 25000000/587/2;
+
+		reg [14:0] counter;
+		always @(posedge clk) begin
+			if (enable_re) begin
+				if(counter==0) 
+					counter <= clkdivider-1; 
+				else counter <= counter-1;
+			end
+		end
+		
+		reg speaker;
+		
+		always @(posedge clk) 
+			if(counter==0) 
+				speaker <= ~speaker;
+endmodule 
+
+
+
+module play_mi(clk, enable_mi, speaker);
+		input clk;
+		output speaker;
+		parameter clkdivider = 25000000/659/2;
+
+		reg [14:0] counter;
+		always @(posedge clk) begin
+			if (enable_mi) begin
+				if(counter==0) 
+					counter <= clkdivider-1; 
+				else counter <= counter-1;
+			end
+		end
+		
+		reg speaker;
+		
+		always @(posedge clk) 
+			if(counter==0) 
+				speaker <= ~speaker;
+				
+endmodule 
+
+

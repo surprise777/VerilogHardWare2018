@@ -1,0 +1,97 @@
+m255
+K4
+z2
+13
+!s112 1.1
+!i10d 8192
+!i10e 25
+!i10f 100
+cModel Technology
+Z0 dC:/Users/asus/Desktop/5-3
+vLUT
+Z1 !s110 1539889797
+!i10b 1
+!s100 kGD@WWU>7^UIeHaRBZAJI0
+IWbYTY=kBQXEik=fjO6^4j3
+Z2 VDg1SIo80bB@j0V0VzS_@n1
+R0
+Z3 w1539889611
+Z4 8Morse.v
+Z5 FMorse.v
+L0 38
+Z6 OV;L;10.5b;63
+r1
+!s85 0
+31
+Z7 !s108 1539889797.000000
+Z8 !s107 Morse.v|
+Z9 !s90 -reportprogress|300|-timescale|1ns/1ns|Morse.v|
+!i113 1
+Z10 o-timescale 1ns/1ns
+Z11 tCvgOpt 0
+n@l@u@t
+vMorse
+R1
+!i10b 1
+!s100 >hT;8m]XGaCN7g^gMJSYP2
+IdgKdOclBYMF^<K=SiUUGW1
+R2
+R0
+R3
+R4
+R5
+L0 1
+R6
+r1
+!s85 0
+31
+R7
+R8
+R9
+!i113 1
+R10
+R11
+n@morse
+vrate_divider
+R1
+!i10b 1
+!s100 L`e1?^fe6KZjkNPHBT04A0
+I709Sj]V6[aG8AhZZHciV:0
+R2
+R0
+R3
+R4
+R5
+L0 61
+R6
+r1
+!s85 0
+31
+R7
+R8
+R9
+!i113 1
+R10
+R11
+vShiftRegister
+R1
+!i10b 1
+!s100 >SB]IHeCF@4RiA7HFG>Tl3
+IZoAH8`9D5=1h@lUk1da=d2
+R2
+R0
+R3
+R4
+R5
+L0 85
+R6
+r1
+!s85 0
+31
+R7
+R8
+R9
+!i113 1
+R10
+R11
+n@shift@register

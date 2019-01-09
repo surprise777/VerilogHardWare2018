@@ -1,0 +1,95 @@
+m255
+K4
+z2
+13
+!s112 1.1
+!i10d 8192
+!i10e 25
+!i10f 100
+cModel Technology
+Z0 dC:/Users/asus/Desktop/5-2test
+vHEXER
+Z1 !s110 1539873064
+!i10b 1
+!s100 3?VeDT@ZZ_[Y<lZIBOFdn2
+I[Pk3[BOm]Q4YRHnQ8T6FY0
+Z2 VDg1SIo80bB@j0V0VzS_@n1
+R0
+Z3 w1539871709
+Z4 8par2.v
+Z5 Fpar2.v
+L0 94
+Z6 OV;L;10.5b;63
+r1
+!s85 0
+31
+Z7 !s108 1539873064.000000
+Z8 !s107 par2.v|
+Z9 !s90 -reportprogress|300|-timescale|1ns/1ns|par2.v|
+!i113 1
+Z10 o-timescale 1ns/1ns
+Z11 tCvgOpt 0
+n@h@e@x@e@r
+vhx_counter
+R1
+!i10b 1
+!s100 cUhP^bY:;4oVZB2[9oU=13
+ILHbUjFnAK>i[G@ZWmLl1S1
+R2
+R0
+R3
+R4
+R5
+L0 70
+R6
+r1
+!s85 0
+31
+R7
+R8
+R9
+!i113 1
+R10
+R11
+vpar2
+R1
+!i10b 1
+!s100 >M_@j0bGI>]:MXLWjI9[T2
+IYhF@XXO:SId13:n6bZ=g@2
+R2
+R0
+R3
+R4
+R5
+L0 1
+R6
+r1
+!s85 0
+31
+R7
+R8
+R9
+!i113 1
+R10
+R11
+vrate_divider
+R1
+!i10b 1
+!s100 o4o>E>nejUeHXFEN]Kbd03
+IjezgNV<BR9BBljL`QRTbT0
+R2
+R0
+R3
+R4
+R5
+L0 37
+R6
+r1
+!s85 0
+31
+R7
+R8
+R9
+!i113 1
+R10
+R11

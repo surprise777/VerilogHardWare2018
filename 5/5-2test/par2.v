@@ -1,0 +1,107 @@
+module par2(SW, HEX0, CLOCK_50);
+    input [3:0] SW;
+	 input CLOCK_50; 
+	 output [6:0] HEX0;
+	 wire enable;
+	 wire clear_b;
+	 wire clock;
+	 wire [1:0] par_load;
+	 wire [2:0] rate;
+	 wire [3:0] value;
+	 assign clock = CLOCK_50;
+	 assign clear_b = SW[3];
+	 assign enable = SW[2];
+	 assign par_load[1] = SW[1];
+	 assign par_load[0] = SW[0];
+	 
+	 rate_divider rd0(
+	       .div_rate(rate),
+			 .clock(clock),
+			 .clear_b(clear_b),
+			 .enable(enable),
+			 .par_load(par_load)
+			 );
+	hx_counter hc0(
+	       .q(value),
+			 .div_rate(rate),
+			 .clock(clock),
+			 .reset_n(clear_b)
+			 );
+	 
+	HEXER H0(
+        .SSW(value),
+        .HEX(HEX0[6:0])
+        );
+endmodule
+	 
+module rate_divider(div_rate, clock, clear_b, enable, par_load);
+    output reg [2:0] div_rate;
+    input clock;
+    input clear_b;
+	 input enable;
+    input [1:0] par_load;
+	 reg [2:0] upper;
+
+	 always @(*)
+	 begin
+	     case (par_load[1:0])
+		      2'b00: upper = 3'b001;
+				2'b01: upper = 3'b010;
+				2'b10: upper = 3'b100;
+				2'b11: upper = 3'b111;
+				default: upper = 3'b010;
+		  endcase
+	 end 
+
+    always @(posedge clock)
+	 begin
+	     if (clear_b == 1'b0)
+		      div_rate <= upper;
+        else if (enable == 1'b1)
+		     begin
+			     if (div_rate == 3'b000)
+			        div_rate <= upper;
+			     else
+				     div_rate <= div_rate - 1'b1;
+           end
+	 end
+endmodule
+	 
+module hx_counter(q, div_rate, clock, reset_n);
+	 //output q;
+	 //wire [3:0] d;
+	 input [2:0] div_rate;
+    input clock;
+    input reset_n;
+    //wire par_load, enable;
+    output reg [3:0]q;
+	 assign enable = (div_rate == 3'b000) ? 1 : 0;
+	 
+    always @(posedge clock)
+	 begin
+	     if (reset_n == 1'b0)
+		      q <= 4'b0000;
+        else if (enable == 1'b1)
+		     begin
+			     if ( q == 4'b1111)
+			        q <= 4'b0000;
+			     else
+				     q <= q + 1'b1;
+           end
+	 end 
+endmodule
+		  
+module HEXER(HEX, SSW);
+    input [3:0] SSW;
+    output [6:0] HEX;
+	 
+	 assign HEX[0] = (~SSW[3] & ~SSW[2] & ~SSW[1] & SSW[0]) | (~SSW[3] & SSW[2] & ~SSW[1] & ~SSW[0]) | (SSW[3] & ~SSW[2] & SSW[1] & SSW[0]) | (SSW[3] & SSW[2] & ~SSW[1] & SSW[0]);
+	 assign HEX[1] = (SSW[3] & SSW[2] & ~SSW[0]) | (SSW[3] & SSW[1] & SSW[0]) | (SSW[2] & SSW[1] & ~SSW[0]) | (~SSW[3] & SSW[2] & ~SSW[1] & SSW[0]);
+	 assign HEX[2] = (SSW[3] & SSW[2] & ~SSW[0]) | (SSW[3] & SSW[2] & SSW[1]) | (~SSW[3] & ~SSW[2] & SSW[1] & ~SSW[0]);
+	 assign HEX[3] = (~SSW[3] & SSW[2] & ~SSW[1] & ~SSW[0]) | (~SSW[3] & ~SSW[2] & ~SSW[1] & SSW[0]) | (SSW[2] & SSW[1] & SSW[0]) | (SSW[3] & ~SSW[2] & SSW[1] & ~SSW[0]);
+	 assign HEX[4] = (~SSW[3] & SSW[0]) | (~SSW[3] & SSW[2] & ~SSW[1]) | (~SSW[2] & ~SSW[1] & SSW[0]);
+	 assign HEX[5] = (SSW[3] & SSW[2] & ~SSW[1] & SSW[0]) | (~SSW[3] & ~SSW[2] & SSW[0]) | (~SSW[3] & ~SSW[2] & SSW[1]) | (~SSW[3] & SSW[1] & SSW[0]);
+	 assign HEX[6] = (~SSW[3] & ~SSW[2] & ~SSW[1]) | (~SSW[3] & SSW[2] & SSW[1] & SSW[0]) | (SSW[3] & SSW[2] & ~SSW[1] & ~SSW[0]);
+	 
+endmodule
+ 
